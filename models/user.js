@@ -26,12 +26,36 @@ module.exports = function (sequelize, DataTypes) {
                 'type': DataTypes.INTEGER,
                 'allowNull': true
             },
+            'user_age': {
+                'type': DataTypes.INTEGER,
+                'allowNull': true
+            },
             'user_weight': {
+                'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
+            'user_fat': {
                 'type': DataTypes.DOUBLE,
                 'allowNull': true
             },
             'user_connect': {
                 'type': DataTypes.STRING(45),
+                'allowNull': true
+            },
+            'user_wechat': {
+                'type': DataTypes.STRING(45),
+                'allowNull': true
+            },
+            'user_learn_time': {
+                'type': DataTypes.STRING(45),
+                'allowNull': true
+            },
+            'user_rating': {
+                'type': DataTypes.STRING(45),
+                'allowNull': true
+            },
+            'user_note': {
+                'type': DataTypes.TEXT,
                 'allowNull': true
             },
             'user_register': {
