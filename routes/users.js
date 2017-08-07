@@ -71,7 +71,7 @@ router.get('/create', function (req, res, next) {
 	});
 });
 
-router.get('/editor/:id', function (req, res, next) {
+router.get('/edit/:id', function (req, res, next) {
 	if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === ''
@@ -107,6 +107,119 @@ router.get('/editor/:id', function (req, res, next) {
 	});
 });
 
+router.get('/edit/user_id/:id', function (req, res, next) {
+	if (req.query.uid === undefined || req.query.uid === ''
+        || req.query.timestamp === undefined || req.query.timestamp === ''
+        || req.query.token === undefined || req.query.token === ''
+        || req.query.field === undefined || req.query.field === '') {
+        return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+    }
+	UserModel.update({
+		user_id: req.query.field,
+	},{
+		where: {
+			id: req.params.id
+		}
+	}).then(function() {
+		UserModel.findOne({
+			where: {
+				id: req.params.id
+			}
+		}).then(function(user) {
+			return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, user: user})
+		})
+	});
+});
+
+router.get('/edit/user_name/:id', function (req, res, next) {
+	if (req.query.uid === undefined || req.query.uid === ''
+        || req.query.timestamp === undefined || req.query.timestamp === ''
+        || req.query.token === undefined || req.query.token === ''
+        || req.query.field === undefined || req.query.field === '') {
+        return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+    }
+	UserModel.update({
+		user_name: req.query.field,
+	},{
+		where: {
+			id: req.params.id
+		}
+	}).then(function() {
+		return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+	});
+});
+
+router.get('/edit/user_weight/:id', function (req, res, next) {
+	if (req.query.uid === undefined || req.query.uid === ''
+        || req.query.timestamp === undefined || req.query.timestamp === ''
+        || req.query.token === undefined || req.query.token === ''
+        || req.query.field === undefined || req.query.field === '') {
+        return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+    }
+	UserModel.update({
+		user_weight: req.query.field,
+	},{
+		where: {
+			id: req.params.id
+		}
+	}).then(function() {
+		return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+	});
+});
+
+router.get('/edit/user_fat/:id', function (req, res, next) {
+	if (req.query.uid === undefined || req.query.uid === ''
+        || req.query.timestamp === undefined || req.query.timestamp === ''
+        || req.query.token === undefined || req.query.token === ''
+        || req.query.field === undefined || req.query.field === '') {
+        return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+    }
+	UserModel.update({
+		user_fat: req.query.field,
+	},{
+		where: {
+			id: req.params.id
+		}
+	}).then(function() {
+		return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+	});
+});
+
+router.get('/edit/user_connect/:id', function (req, res, next) {
+	if (req.query.uid === undefined || req.query.uid === ''
+        || req.query.timestamp === undefined || req.query.timestamp === ''
+        || req.query.token === undefined || req.query.token === ''
+        || req.query.field === undefined || req.query.field === '') {
+        return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+    }
+	UserModel.update({
+		user_connect: req.query.field,
+	},{
+		where: {
+			id: req.params.id
+		}
+	}).then(function() {
+		return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+	});
+});
+
+router.get('/edit/user_note/:id', function (req, res, next) {
+	if (req.query.uid === undefined || req.query.uid === ''
+        || req.query.timestamp === undefined || req.query.timestamp === ''
+        || req.query.token === undefined || req.query.token === ''
+        || req.query.field === undefined || req.query.field === '') {
+        return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+    }
+	UserModel.update({
+		user_note: req.query.field,
+	},{
+		where: {
+			id: req.params.id
+		}
+	}).then(function() {
+		return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+	});
+});
 
 router.get('/remove/:id', function (req, res, next) {
 	if (req.query.uid === undefined || req.query.uid === ''
