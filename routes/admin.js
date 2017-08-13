@@ -5,7 +5,7 @@ var sha1 = require('sha1');
 var md5 = require('md5');
 var MESSAGE = require('./config').MESSAGE;
 var KEY = require('./config').KEY;
-
+var checkToken = require('./config').checkToken;
 
 router.get('/login', function (req, res, next) {
 

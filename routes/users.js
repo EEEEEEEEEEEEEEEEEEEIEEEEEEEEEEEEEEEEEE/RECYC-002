@@ -5,26 +5,34 @@ var sha1 = require('sha1');
 var md5 = require('md5');
 var MESSAGE = require('./config').MESSAGE;
 var KEY = require('./config').KEY;
+var checkToken = require('./config').checkToken;
 
 router.get('/', function (req, res, next) {
+
 	if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === '') {
         return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
     }
-
+    if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
+        return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
+    }
+    
 	UserModel.findAll().then(function(users) {
 		return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, users: users})
 	});
 });
 
 router.get('/:id', function (req, res, next) {
+
 	if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === '') {
-        return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+        return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR})
     }
-
+    if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
+        return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
+    }
 	UserModel.findOne({
 		where: {
 			id: req.params.id
@@ -35,6 +43,7 @@ router.get('/:id', function (req, res, next) {
 });
 
 router.get('/create', function (req, res, next) {
+
 	if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === ''
@@ -51,6 +60,10 @@ router.get('/create', function (req, res, next) {
         || req.query.user_note === undefined || req.query.user_note === '') {
         return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
     }
+    if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
+        return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
+    }
+
 
     var user = {
     	user_id: req.query.user_id,
@@ -72,6 +85,7 @@ router.get('/create', function (req, res, next) {
 });
 
 router.get('/edit/:id', function (req, res, next) {
+
 	if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === ''
@@ -86,6 +100,9 @@ router.get('/edit/:id', function (req, res, next) {
         || req.query.user_connect === undefined || req.query.user_connect === ''
         || req.query.user_note === undefined || req.query.user_note === '') {
         return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+    }
+    if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
+        return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
     }
 	UserModel.update({
 		user_id: req.query.user_id,
@@ -108,11 +125,15 @@ router.get('/edit/:id', function (req, res, next) {
 });
 
 router.get('/edit/user_id/:id', function (req, res, next) {
+
 	if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === ''
         || req.query.field === undefined || req.query.field === '') {
         return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+    }
+    if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
+        return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
     }
 	UserModel.update({
 		user_id: req.query.field,
@@ -132,11 +153,15 @@ router.get('/edit/user_id/:id', function (req, res, next) {
 });
 
 router.get('/edit/user_name/:id', function (req, res, next) {
+
 	if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === ''
         || req.query.field === undefined || req.query.field === '') {
         return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+    }
+    if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
+        return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
     }
 	UserModel.update({
 		user_name: req.query.field,
@@ -150,11 +175,15 @@ router.get('/edit/user_name/:id', function (req, res, next) {
 });
 
 router.get('/edit/user_weight/:id', function (req, res, next) {
+
 	if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === ''
         || req.query.field === undefined || req.query.field === '') {
         return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+    }
+    if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
+        return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
     }
 	UserModel.update({
 		user_weight: req.query.field,
@@ -168,11 +197,15 @@ router.get('/edit/user_weight/:id', function (req, res, next) {
 });
 
 router.get('/edit/user_fat/:id', function (req, res, next) {
+
 	if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === ''
         || req.query.field === undefined || req.query.field === '') {
         return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+    }
+    if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
+        return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
     }
 	UserModel.update({
 		user_fat: req.query.field,
@@ -186,11 +219,15 @@ router.get('/edit/user_fat/:id', function (req, res, next) {
 });
 
 router.get('/edit/user_connect/:id', function (req, res, next) {
+
 	if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === ''
         || req.query.field === undefined || req.query.field === '') {
         return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+    }
+    if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
+        return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
     }
 	UserModel.update({
 		user_connect: req.query.field,
@@ -204,11 +241,15 @@ router.get('/edit/user_connect/:id', function (req, res, next) {
 });
 
 router.get('/edit/user_note/:id', function (req, res, next) {
+
 	if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === ''
         || req.query.field === undefined || req.query.field === '') {
         return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+    }
+    if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
+        return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
     }
 	UserModel.update({
 		user_note: req.query.field,
@@ -222,12 +263,15 @@ router.get('/edit/user_note/:id', function (req, res, next) {
 });
 
 router.get('/remove/:id', function (req, res, next) {
+	
 	if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === '') {
         return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
     }
-
+    if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
+        return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
+    }
 	UserModel.destory({
 		where: {
 			id: req.params.id

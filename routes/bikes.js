@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var CourseModel = require('../models').Course;
+var BikeModel = require('../models').Bike;
 var sha1 = require('sha1');
 var md5 = require('md5');
 var MESSAGE = require('./config').MESSAGE;
@@ -18,13 +18,14 @@ router.get('/', function (req, res, next) {
     if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
         return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
     }
-    
-    CourseModel.findAll().then(function(courses) {
-        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, courses: courses})
+
+    BikeModel.findAll().then(function(bikes) {
+        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, bikes: bikes})
     });
 });
 
 router.get('/:id', function (req, res, next) {
+
     if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === '') {
@@ -34,100 +35,82 @@ router.get('/:id', function (req, res, next) {
     if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
         return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
     }
-    CourseModel.findOne({
+
+    BikeModel.findOne({
         where: {
             id: req.params.id
         }
-    }).then(function(course) {
-        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, course: course})
+    }).then(function(bike) {
+        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, bike: bike})
     });
 });
 
 router.get('/create', function (req, res, next) {
-
+    
     if (req.query.uid === undefined || req.query.uid === ''
-        || req.query.token === undefined || req.query.token === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
-        || req.query.course_id === undefined || req.query.course_id === ''
-        || req.query.course_name === undefined || req.query.course_name === ''
-        || req.query.course_content === undefined || req.query.course_content === ''
-        || req.query.course_teacher === undefined || req.query.course_teacher === ''
-        || req.query.course_capacity === undefined || req.query.course_capacity === ''
-        || req.query.course_register === undefined || req.query.course_register === '') {
+        || req.query.token === undefined || req.query.token === ''
+        || req.query.bike_id === undefined || req.query.bike_id === ''
+        || req.query.bike_type === undefined || req.query.bike_type === ''
+        || req.query.bike_position === undefined || req.query.bike_position === ''
+        || req.query.bike_used === undefined || req.query.bike_used === ''
+        || req.query.bike_update === undefined || req.query.bike_update === ''
+        || req.query.bike_register === undefined || req.query.bike_register === '') {
         return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
     }
     
     if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
         return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
     }
-    var course = {
-        course_id: req.query.course_id,
-        course_name: req.query.course_name,
-        course_content: req.query.course_content,
-        course_teacher: req.query.course_teacher,
-        course_capacity: req.query.course_capacity,
-        course_register: req.query.course_register,
+
+    var bike = {
+        bike_id: req.query.bike_id,
+        bike_type: req.query.bike_type,
+        bike_position: req.query.bike_position,
+        bike_used: req.query.bike_used,
+        bike_update: req.query.bike_update,
+        bike_register: req.query.bike_register,
     }
 
-    CourseModel.create(course).then(function() {
+    BikeModel.create(bike).then(function() {
         return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
-    });
+    })
 });
 
 router.get('/edit/:id', function (req, res, next) {
-
+    
     if (req.query.uid === undefined || req.query.uid === ''
-        || req.query.token === undefined || req.query.token === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
-        || req.query.course_id === undefined || req.query.course_id === ''
-        || req.query.course_name === undefined || req.query.course_name === ''
-        || req.query.course_content === undefined || req.query.course_content === ''
-        || req.query.course_teacher === undefined || req.query.course_teacher === ''
-        || req.query.course_capacity === undefined || req.query.course_capacity === '') {
+        || req.query.token === undefined || req.query.token === ''
+        || req.query.bike_id === undefined || req.query.bike_id === ''
+        || req.query.bike_type === undefined || req.query.bike_type === ''
+        || req.query.bike_position === undefined || req.query.bike_position === ''
+        || req.query.bike_used === undefined || req.query.bike_used === ''
+        || req.query.bike_update === undefined || req.query.bike_update === '') {
         return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
     }
     
     if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
         return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
     }
-    CourseModel.update({
-        course_id: req.query.course_id,
-        course_name: req.query.course_name,
-        course_content: req.query.course_content,
-        course_teacher: req.query.course_teacher,
-        course_capacity: req.query.course_capacity
+
+    BikeModel.update({
+        bike_id: req.query.bike_id,
+        bike_type: req.query.bike_type,
+        bike_position: req.query.bike_position,
+        bike_used: req.query.bike_used,
+        bike_update: req.query.bike_update
     },{
         where: {
             id: req.params.id
         }
     }).then(function() {
         return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
-    });
+    })
 });
 
-router.get('/edit/course_id/:id', function (req, res, next) {
-    if (req.query.uid === undefined || req.query.uid === ''
-        || req.query.timestamp === undefined || req.query.timestamp === ''
-        || req.query.token === undefined || req.query.token === ''
-        || req.query.field === undefined || req.query.field === '') {
-        return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
-    }
+router.get('/edit/bike_id/:id', function (req, res, next) {
     
-    if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
-        return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
-    }
-    CourseModel.update({
-        course_id: req.query.field
-    },{
-        where: {
-            id: req.params.id
-        }
-    }).then(function() {
-        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
-    });
-});
-
-router.get('/edit/course_name/:id', function (req, res, next) {
     if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === ''
@@ -138,18 +121,20 @@ router.get('/edit/course_name/:id', function (req, res, next) {
     if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
         return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
     }
-    CourseModel.update({
-        course_name: req.query.field
+
+    BikeModel.update({
+        bike_id: req.query.field
     },{
         where: {
             id: req.params.id
         }
-    }).then(function(course) {
+    }).then(function() {
         return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
-    });
+    })
 });
 
-router.get('/edit/course_content/:id', function (req, res, next) {
+router.get('/edit/bike_type/:id', function (req, res, next) {
+    
     if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === ''
@@ -160,18 +145,20 @@ router.get('/edit/course_content/:id', function (req, res, next) {
     if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
         return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
     }
-    CourseModel.update({
-        course_content: req.query.field
+
+    BikeModel.update({
+        bike_type: req.query.field
     },{
         where: {
             id: req.params.id
         }
     }).then(function() {
         return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
-    });
+    })
 });
 
-router.get('/edit/course_teacher/:id', function (req, res, next) {
+router.get('/edit/bike_position/:id', function (req, res, next) {
+    
     if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === ''
@@ -182,18 +169,20 @@ router.get('/edit/course_teacher/:id', function (req, res, next) {
     if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
         return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
     }
-    CourseModel.update({
-        course_teacher: req.query.field
+
+    BikeModel.update({
+        bike_position: req.query.field
     },{
         where: {
             id: req.params.id
         }
     }).then(function() {
         return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
-    });
+    })
 });
 
-router.get('/edit/course_capacity/:id', function (req, res, next) {
+router.get('/edit/bike_used/:id', function (req, res, next) {
+    
     if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === ''
@@ -204,30 +193,54 @@ router.get('/edit/course_capacity/:id', function (req, res, next) {
     if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
         return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
     }
-    CourseModel.update({
-        course_capacity: req.query.field
+
+    BikeModel.update({
+        bike_used: req.query.field
     },{
         where: {
             id: req.params.id
         }
     }).then(function() {
         return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
-    });
+    })
 });
 
-
-router.get('/remove/:id', function (req, res, next) {
-
+router.get('/edit/bike_update/:id', function (req, res, next) {
+    
     if (req.query.uid === undefined || req.query.uid === ''
+        || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === ''
-        || req.query.timestamp === undefined || req.query.timestamp === '') {
+        || req.query.field === undefined || req.query.field === '') {
         return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
     }
     
     if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
         return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
     }
-    CourseModel.destory({
+
+    BikeModel.update({
+        bike_update: req.query.field
+    },{
+        where: {
+            id: req.params.id
+        }
+    }).then(function() {
+        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+    })
+});
+router.get('remove/:id', function (req, res, next) {
+
+    if (req.query.uid === undefined || req.query.uid === ''
+        || req.query.timestamp === undefined || req.query.timestamp === ''
+        || req.query.token === undefined || req.query.token === '') {
+        return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+    }
+    
+    if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
+        return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
+    }
+
+    BikeModel.destory({
         where: {
             id: req.params.id
         }
@@ -235,5 +248,6 @@ router.get('/remove/:id', function (req, res, next) {
         return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
     });
 });
+
 
 module.exports = router;
