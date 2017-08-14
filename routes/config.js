@@ -11,7 +11,7 @@ var MESSAGE = {
 var KEY = 'airing';
 
 var checkToken = function(uid, timestamp, token) {
-	return token === md5((admin.id).toString() + timestamp.toString() + KEY)
+	return token === md5(uid.toString() + timestamp.toString() + KEY)
 }
 
 exports.MESSAGE = MESSAGE;
