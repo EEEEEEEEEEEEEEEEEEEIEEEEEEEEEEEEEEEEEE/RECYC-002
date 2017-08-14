@@ -101,7 +101,13 @@ router.get('/edit/:id', function (req, res, next) {
             id: req.params.id
         }
     }).then(function() {
-        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+        CourseModel.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(course) {
+            return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, course: course})
+        })
     });
 });
 
@@ -123,7 +129,13 @@ router.get('/edit/course_id/:id', function (req, res, next) {
             id: req.params.id
         }
     }).then(function() {
-        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+        CourseModel.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(course) {
+            return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, course: course})
+        })
     });
 });
 
@@ -145,7 +157,13 @@ router.get('/edit/course_name/:id', function (req, res, next) {
             id: req.params.id
         }
     }).then(function(course) {
-        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+        CourseModel.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(course) {
+            return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, course: course})
+        })
     });
 });
 
@@ -167,7 +185,13 @@ router.get('/edit/course_content/:id', function (req, res, next) {
             id: req.params.id
         }
     }).then(function() {
-        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+        CourseModel.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(course) {
+            return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, course: course})
+        })
     });
 });
 
@@ -189,7 +213,13 @@ router.get('/edit/course_teacher/:id', function (req, res, next) {
             id: req.params.id
         }
     }).then(function() {
-        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+        CourseModel.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(course) {
+            return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, course: course})
+        })
     });
 });
 
@@ -211,7 +241,13 @@ router.get('/edit/course_capacity/:id', function (req, res, next) {
             id: req.params.id
         }
     }).then(function() {
-        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+        CourseModel.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(course) {
+            return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, course: course})
+        })
     });
 });
 

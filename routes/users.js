@@ -170,7 +170,13 @@ router.get('/edit/user_name/:id', function (req, res, next) {
 			id: req.params.id
 		}
 	}).then(function() {
-		return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+		UserModel.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(user) {
+            return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, user: user})
+        })
 	});
 });
 
@@ -192,7 +198,13 @@ router.get('/edit/user_weight/:id', function (req, res, next) {
 			id: req.params.id
 		}
 	}).then(function() {
-		return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+		UserModel.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(user) {
+            return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, user: user})
+        })
 	});
 });
 
@@ -214,7 +226,13 @@ router.get('/edit/user_fat/:id', function (req, res, next) {
 			id: req.params.id
 		}
 	}).then(function() {
-		return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+		UserModel.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(user) {
+            return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, user: user})
+        })
 	});
 });
 
@@ -236,7 +254,13 @@ router.get('/edit/user_connect/:id', function (req, res, next) {
 			id: req.params.id
 		}
 	}).then(function() {
-		return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+		UserModel.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(user) {
+            return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, user: user})
+        })
 	});
 });
 
@@ -258,7 +282,13 @@ router.get('/edit/user_note/:id', function (req, res, next) {
 			id: req.params.id
 		}
 	}).then(function() {
-		return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+		UserModel.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(user) {
+            return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, user: user})
+        })
 	});
 });
 
@@ -276,7 +306,7 @@ router.get('/remove/:id', function (req, res, next) {
 		where: {
 			id: req.params.id
 		}
-	}).then(function(user) {
+	}).then(function() {
 		return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
 	});
 });
