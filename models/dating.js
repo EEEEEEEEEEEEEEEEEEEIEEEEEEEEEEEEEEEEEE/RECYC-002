@@ -18,6 +18,14 @@ module.exports = function (sequelize, DataTypes) {
                 'type': DataTypes.STRING(45),
                 'allowNull': true
             },
+            'dating_id': {
+                'type': DataTypes.INTEGER,
+                'allowNull': true
+            },
+            'dating_rating': {
+                'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
             'dating_users': {
                 'type': DataTypes.TEXT,
                 'allowNull': true
