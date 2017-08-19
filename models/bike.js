@@ -7,7 +7,7 @@ module.exports = function (sequelize, DataTypes) {
                 'allowNull': false
             },
             'bike_type': {
-                'type': DataTypes.INTEGER,
+                'type': DataTypes.STRING(45),
                 'allowNull': false
             },
             'bike_position': {

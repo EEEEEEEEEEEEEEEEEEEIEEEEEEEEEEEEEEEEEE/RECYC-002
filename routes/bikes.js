@@ -24,11 +24,12 @@ router.get('/', function (req, res, next) {
     });
 });
 
-router.get('/:id', function (req, res, next) {
+router.get('/detail', function (req, res, next) {
 
     if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
-        || req.query.token === undefined || req.query.token === '') {
+        || req.query.token === undefined || req.query.token === ''
+        || req.query.bike_id === undefined || req.query.bike_id === '') {
         return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
     }
     
@@ -38,7 +39,7 @@ router.get('/:id', function (req, res, next) {
 
     BikeModel.findOne({
         where: {
-            id: req.params.id
+            id: req.query.bike_id 
         }
     }).then(function(bike) {
         return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, bike: bike})
@@ -46,7 +47,7 @@ router.get('/:id', function (req, res, next) {
 });
 
 router.get('/create', function (req, res, next) {
-    
+
     if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === ''
@@ -73,7 +74,13 @@ router.get('/create', function (req, res, next) {
     }
 
     BikeModel.create(bike).then(function() {
-        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+        BikeModel.findOne({
+            where: {
+                bike_id: req.query.bike_id
+            }
+        }).then(function(bike) {
+            return res.jsonp({code: 0, log: '刘杰容是sb',msg: MESSAGE.SUCCESS, bike: bike})
+        })
     })
 });
 
