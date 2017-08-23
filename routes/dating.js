@@ -25,7 +25,7 @@ router.get('/', function (req, res, next) {
     });
 });
 
-router.get('/:id', function (req, res, next) {
+router.get('/detail', function (req, res, next) {
 
     if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
@@ -38,7 +38,7 @@ router.get('/:id', function (req, res, next) {
     }
     DatingModel.findOne({
         where: {
-            id: req.params.id
+            id: req.query.id
         }
     }).then(function(dating) {
         return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, dating: dating})
@@ -77,7 +77,7 @@ router.get('/create', function (req, res, next) {
             course_teacher: course.course_teacher,
             dating_id: req.query.dating_id,
             dating_rating: req.query.dating_rating,
-            dating_users: req.query.dating_users,
+            dating_users: '',
             dating_time: req.query.dating_time,
             dating_capacity: req.query.dating_capacity,
             dating_register: req.query.dating_register,
