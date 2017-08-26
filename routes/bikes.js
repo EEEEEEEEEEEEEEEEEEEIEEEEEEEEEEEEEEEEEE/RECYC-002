@@ -136,7 +136,13 @@ router.get('/edit/bike_id/:id', function (req, res, next) {
             id: req.params.id
         }
     }).then(function() {
-        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+        BikeModel.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(bike) {
+            return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, bike: bike})
+        })
     })
 });
 
@@ -160,7 +166,13 @@ router.get('/edit/bike_type/:id', function (req, res, next) {
             id: req.params.id
         }
     }).then(function() {
-        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+        BikeModel.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(bike) {
+            return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, bike: bike})
+        })
     })
 });
 
@@ -184,7 +196,13 @@ router.get('/edit/bike_position/:id', function (req, res, next) {
             id: req.params.id
         }
     }).then(function() {
-        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+        BikeModel.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(bike) {
+            return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, bike: bike})
+        })
     })
 });
 
@@ -208,7 +226,13 @@ router.get('/edit/bike_used/:id', function (req, res, next) {
             id: req.params.id
         }
     }).then(function() {
-        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+        BikeModel.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(bike) {
+            return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, bike: bike})
+        })
     })
 });
 
@@ -216,8 +240,7 @@ router.get('/edit/bike_update/:id', function (req, res, next) {
     
     if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
-        || req.query.token === undefined || req.query.token === ''
-        || req.query.field === undefined || req.query.field === '') {
+        || req.query.token === undefined || req.query.token === '') {
         return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
     }
     
@@ -226,13 +249,19 @@ router.get('/edit/bike_update/:id', function (req, res, next) {
     }
 
     BikeModel.update({
-        bike_update: req.query.field
+        bike_update: new Date().getTime()
     },{
         where: {
             id: req.params.id
         }
     }).then(function() {
-        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+        BikeModel.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(bike) {
+            return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, bike: bike})
+        })
     })
 });
 router.get('remove/:id', function (req, res, next) {
