@@ -24,7 +24,7 @@ router.get('/', function (req, res, next) {
     });
 });
 
-router.get('/detail', function (req, res, next) {
+router.get('/show/:id', function (req, res, next) {
 
     if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
@@ -39,7 +39,7 @@ router.get('/detail', function (req, res, next) {
 
     BikeModel.findOne({
         where: {
-            id: req.query.bike_id 
+            id: req.params.bike_id 
         }
     }).then(function(bike) {
         return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, bike: bike})

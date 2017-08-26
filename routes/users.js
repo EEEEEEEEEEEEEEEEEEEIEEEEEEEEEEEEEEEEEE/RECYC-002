@@ -23,7 +23,28 @@ router.get('/', function (req, res, next) {
 	});
 });
 
-router.get('/:id', function (req, res, next) {
+router.get('/list', function (req, res, next) {
+
+    if (req.query.uid === undefined || req.query.uid === ''
+        || req.query.timestamp === undefined || req.query.timestamp === ''
+        || req.query.token === undefined || req.query.token === ''
+        || req.query.ids === undefined || req.query.ids === '') {
+        return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+    }
+    if(!checkToken(req.query.uid, req.query.timestamp, req.query.token)){
+        return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
+    }
+    
+    UserModel.findAll({
+        where: {
+            id: req.query.ids.split(',')
+        }
+    }).then(function(users) {
+        return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, users: users})
+    });
+});
+
+router.get('/show/:id', function (req, res, next) {
 
 	if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''

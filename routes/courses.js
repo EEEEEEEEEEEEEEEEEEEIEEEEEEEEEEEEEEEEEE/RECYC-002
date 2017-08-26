@@ -24,7 +24,7 @@ router.get('/', function (req, res, next) {
     });
 });
 
-router.get('/:id', function (req, res, next) {
+router.get('/show/:id', function (req, res, next) {
     if (req.query.uid === undefined || req.query.uid === ''
         || req.query.timestamp === undefined || req.query.timestamp === ''
         || req.query.token === undefined || req.query.token === '') {
