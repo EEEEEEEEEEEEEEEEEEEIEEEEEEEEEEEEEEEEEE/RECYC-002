@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var CourseModel = require('../models').Course;
+var CourseModel = require('../../models/index').Course;
 var sha1 = require('sha1');
 var md5 = require('md5');
 var MESSAGE = require('./config').MESSAGE;

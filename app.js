@@ -6,11 +6,20 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
-var admin = require('./routes/admin');
-var courses = require('./routes/courses');
-var bikes = require('./routes/bikes');
-var datings = require('./routes/datings');
+var users_v1 = require('./routes/v1/users');
+var admin_v1 = require('./routes/v1/admin');
+var courses_v1 = require('./routes/v1/courses');
+var bikes_v1 = require('./routes/v1/bikes');
+var datings_v1 = require('./routes/v1/datings');
+
+var users_v2 = require('./routes/v2/users');
+var admin_v2 = require('./routes/v2/admin');
+var courses_v2 = require('./routes/v2/courses');
+var bikes_v2 = require('./routes/v2/bikes');
+var datings_v2 = require('./routes/v2/datings');
+var coachs_v2 = require('./routes/v2/coachs');
+var companies_v2 = require('./routes/v2/companies');
+var news_v2 = require('./routes/v2/news');
 
 var app = express();
 
@@ -27,11 +36,20 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/v1/users', users);
-app.use('/v1/admin', admin);
-app.use('/v1/courses', courses);
-app.use('/v1/datings', datings);
-app.use('/v1/bikes', bikes);
+app.use('/v1/users', users_v1);
+app.use('/v1/admin', admin_v1);
+app.use('/v1/courses', courses_v1);
+app.use('/v1/datings', datings_v1);
+app.use('/v1/bikes', bikes_v1);
+
+app.use('/v2/users', users_v2);
+app.use('/v2/admin', admin_v2);
+app.use('/v2/courses', courses_v2);
+app.use('/v2/datings', datings_v2);
+app.use('/v2/bikes', bikes_v2);
+app.use('/v2/coachs', coachs_v2);
+app.use('/v2/companies', companies_v2);
+app.use('/v2/news', news_v2);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

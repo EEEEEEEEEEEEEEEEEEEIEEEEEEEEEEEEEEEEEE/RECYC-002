@@ -30,12 +30,80 @@ module.exports = function (sequelize, DataTypes) {
                 'type': DataTypes.INTEGER,
                 'allowNull': true
             },
+            'user_height': {
+                'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
             'user_weight': {
+                'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
+            'user_weight_without_fat': {
                 'type': DataTypes.DOUBLE,
                 'allowNull': true
             },
             'user_fat': {
                 'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
+            'user_muscle': {
+                'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
+            'user_bone': {
+                'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
+            'user_protein': {
+                'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
+            'user_water': {
+                'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
+            'user_pbf': {
+                'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
+            'user_bmi': {
+                'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
+            'user_whr': {
+                'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
+            'user_visceral_fat': {
+                'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
+            'user_sbw': {
+                'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
+            'user_weight_control': {
+                'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
+            'user_basal_metabolism': {
+                'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
+            'user_control_fat': {
+                'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
+            'user_control_muscle': {
+                'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
+            'user_health_score': {
+                'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
+            'user_shape': {
+                'type': DataTypes.INTEGER,
                 'allowNull': true
             },
             'user_connect': {
@@ -62,6 +130,18 @@ module.exports = function (sequelize, DataTypes) {
                 'type': DataTypes.DOUBLE,
                 'allowNull': true
             },
+            'user_openid': {
+                'type': DataTypes.STRING(45),
+                'allowNull': true
+            },
+            'last_measure_date': {
+                'type': DataTypes.STRING(45),
+                'allowNull': true
+            },
+            'last_measure_time': {
+                'type': DataTypes.STRING(45),
+                'allowNull': true
+            }
         }
     );
 }

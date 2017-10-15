@@ -2,25 +2,13 @@ module.exports = function (sequelize, DataTypes) {
     return sequelize.define(
         'dating',
         {
-            'courseId': {
-                'type': DataTypes.INTEGER,
-                'allowNull': false
-            },
-            'course_name': {
-                'type': DataTypes.STRING(125),
-                'allowNull': false
-            },
-            'course_content': {
-                'type': DataTypes.TEXT,
-                'allowNull': true
-            },
-            'course_teacher': {
-                'type': DataTypes.STRING(45),
-                'allowNull': true
-            },
             'dating_id': {
                 'type': DataTypes.INTEGER,
                 'allowNull': true
+            },
+            'courseId': {
+                'type': DataTypes.INTEGER,
+                'allowNull': false
             },
             'dating_rating': {
                 'type': DataTypes.DOUBLE,
@@ -30,7 +18,23 @@ module.exports = function (sequelize, DataTypes) {
                 'type': DataTypes.TEXT,
                 'allowNull': true
             },
+            'dating_degree': {
+                'type': DataTypes.INTEGER,
+                'allowNull': true
+            },
+            'dating_valid': {
+                'type': DataTypes.STRING(125),
+                'allowNull': true
+            },
+            'dating_date': {
+                'type': DataTypes.STRING(125),
+                'allowNull': true
+            },
             'dating_time': {
+                'type': DataTypes.STRING(125),
+                'allowNull': true
+            },
+            'dating_place': {
                 'type': DataTypes.STRING(125),
                 'allowNull': true
             },
@@ -40,6 +44,10 @@ module.exports = function (sequelize, DataTypes) {
             },
             'dating_register': {
                 'type': DataTypes.DOUBLE,
+                'allowNull': true
+            },
+            'finished': {
+                'type': DataTypes.BOOLEAN,
                 'allowNull': true
             }
         },

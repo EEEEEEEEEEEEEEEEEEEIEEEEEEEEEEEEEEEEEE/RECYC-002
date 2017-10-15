@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var BikeModel = require('../models').Bike;
+var BikeModel = require('../../models/index').Bike;
 var sha1 = require('sha1');
 var md5 = require('md5');
 var MESSAGE = require('./config').MESSAGE;

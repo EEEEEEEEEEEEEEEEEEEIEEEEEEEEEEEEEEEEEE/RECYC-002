@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var UserModel = require('../models').User;
+var UserModel = require('../../models/index').User;
 var sha1 = require('sha1');
 var md5 = require('md5');
 var MESSAGE = require('./config').MESSAGE;
@@ -97,7 +97,8 @@ router.get('/create', function (req, res, next) {
     	user_fat: req.query.user_fat,
     	user_wechat: req.query.user_wechat,
     	user_connect: req.query.user_connect,
-    	user_note: req.query.user_note
+    	user_note: req.query.user_note,
+        user_face: 'http://blog.ursb.me/img/face.png'
     }
 
 	UserModel.create(user).then(function() {

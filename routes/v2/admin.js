@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var AdminModel = require('../models').Admin;
+var AdminModel = require('../../models').Admin;
 var sha1 = require('sha1');
 var md5 = require('md5');
 var MESSAGE = require('./config').MESSAGE;
@@ -13,7 +13,7 @@ router.get('/login', function (req, res, next) {
 
 	if (req.query.account === undefined || req.query.account === ''
         || req.query.password === undefined || req.query.password === '') {
-        return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+        return res.jsonp({code: 500, msg: MESSAGE.PARAMETER_ERROR});
     }
 
     AdminModel.findOne({
