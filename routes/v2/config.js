@@ -9,7 +9,7 @@ var MESSAGE = {
   TOKEN_ERROR: 'TOKEN失效'  // 403
 };
 
-var KEY = 'zyktrcn';
+var KEY = 'airing';
 
 var checkToken = function (uid, timestamp, token) {
   return token === md5(uid.toString() + timestamp.toString() + KEY)
