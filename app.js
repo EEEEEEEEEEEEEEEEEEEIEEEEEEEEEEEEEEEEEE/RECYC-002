@@ -11,6 +11,7 @@ var admin_v1 = require('./routes/v1/admin');
 var courses_v1 = require('./routes/v1/courses');
 var bikes_v1 = require('./routes/v1/bikes');
 var datings_v1 = require('./routes/v1/datings');
+var util_v1 = require('./routes/v1/utils');
 
 var users_v2 = require('./routes/v2/users');
 var admin_v2 = require('./routes/v2/admin');
@@ -41,6 +42,7 @@ app.use('/v1/admin', admin_v1);
 app.use('/v1/courses', courses_v1);
 app.use('/v1/datings', datings_v1);
 app.use('/v1/bikes', bikes_v1);
+app.use('/v1/utils', util_v1);
 
 app.use('/v2/users', users_v2);
 app.use('/v2/admin', admin_v2);
