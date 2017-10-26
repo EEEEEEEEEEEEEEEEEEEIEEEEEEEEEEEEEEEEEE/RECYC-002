@@ -139,6 +139,34 @@ router.get('/edit/course_id/:id', function (req, res, next) {
   });
 });
 
+router.get('/edit/course_title_img/:id', function (req, res, next) {
+
+    if (req.query.uid === undefined || req.query.uid === ''
+        || req.query.timestamp === undefined || req.query.timestamp === ''
+        || req.query.token === undefined || req.query.token === ''
+        || req.query.field === undefined || req.query.field === '') {
+        return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+    }
+    if (!checkToken(req.query.uid, req.query.timestamp, req.query.token)) {
+        return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
+    }
+    CourseModel.update({
+        course_title_img: req.query.field,
+    }, {
+        where: {
+            id: req.params.id
+        }
+    }).then(function () {
+        CourseModel.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function (course) {
+            return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, course: course})
+        })
+    });
+});
+
 router.get('/edit/course_name/:id', function (req, res, next) {
   if (req.query.uid === undefined || req.query.uid === ''
     || req.query.timestamp === undefined || req.query.timestamp === ''

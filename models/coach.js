@@ -18,8 +18,8 @@ module.exports = function (sequelize, DataTypes) {
                 'type': DataTypes.STRING(45),
                 'allowNull': false
             },
-            'coach_head': {
-                'type': DataTypes.STRING(45),
+            'coach_face': {
+                'type': DataTypes.STRING(125),
                 'allowNull': true
             },
             'coach_card_picture': {

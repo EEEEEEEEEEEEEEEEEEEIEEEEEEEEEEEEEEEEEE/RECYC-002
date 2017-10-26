@@ -57,3 +57,6 @@ typings/
 # dotenv environment variables file
 .env
 
+config/sequelize.js
+config/sequelize.js
+routes/v1/config.js

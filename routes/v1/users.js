@@ -93,8 +93,24 @@ router.get('/create', function (req, res, next) {
     user_name: req.query.user_name,
     user_sex: req.query.user_sex,
     user_age: req.query.user_age,
+    user_height: req.query.user_height,
     user_weight: req.query.user_weight,
+    user_muscle: req.query.user_muscle,
+    user_bone: req.query.user_bone,
+    user_protein: req.query.user_protein,
+    user_weight_without_fat: req.query.user_weight_without_fat,
     user_fat: req.query.user_fat,
+    user_water: req.query.user_water,
+    user_whr: req.query.user_whr,
+    user_bmi: req.query.user_bmi,
+    user_pbf: req.query.user_pbf,
+    user_visceral_fat: req.query.user_visceral_fat,
+    user_sbw: req.query.user_sbw,
+    user_weight_control: req.query.user_weight_control,
+    user_basal_metabolism: req.query.user_basal_metabolism,
+    user_health_score: req.query.user_health_score,
+    user_control_fat: req.query.user_control_fat,
+    user_control_muscle: req.query.user_control_muscle,
     user_wechat: req.query.user_wechat,
     user_connect: req.query.user_connect,
     user_note: req.query.user_note,
@@ -159,6 +175,34 @@ router.get('/edit/user_id/:id', function (req, res, next) {
   }
   UserModel.update({
     user_id: req.query.field,
+  }, {
+    where: {
+      id: req.params.id
+    }
+  }).then(function () {
+    UserModel.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function (user) {
+      return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, user: user})
+    })
+  });
+});
+
+router.get('/edit/user_face/:id', function (req, res, next) {
+
+  if (req.query.uid === undefined || req.query.uid === ''
+    || req.query.timestamp === undefined || req.query.timestamp === ''
+    || req.query.token === undefined || req.query.token === ''
+    || req.query.field === undefined || req.query.field === '') {
+    return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+  }
+  if (!checkToken(req.query.uid, req.query.timestamp, req.query.token)) {
+    return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
+  }
+  UserModel.update({
+    user_face: req.query.field,
   }, {
     where: {
       id: req.params.id
