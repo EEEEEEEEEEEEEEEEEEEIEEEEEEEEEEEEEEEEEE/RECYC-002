@@ -120,6 +120,34 @@ router.get('/edit/dating_id/:id', function (req, res, next) {
   });
 });
 
+router.get('/edit/dating_title_img/:id', function (req, res, next) {
+  if (req.query.uid === undefined || req.query.uid === ''
+    || req.query.timestamp === undefined || req.query.timestamp === ''
+    || req.query.token === undefined || req.query.token === ''
+    || req.query.field === undefined || req.query.field === '') {
+    return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
+  }
+
+  if (!checkToken(req.query.uid, req.query.timestamp, req.query.token)) {
+    return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
+  }
+  DatingModel.update({
+      dating_title_img: req.query.field
+  }, {
+    where: {
+      id: req.params.id
+    }
+  }).then(function () {
+    DatingModel.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function (dating) {
+      return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, dating: dating})
+    })
+  });
+});
+
 router.get('/edit/course_teacher/:id', function (req, res, next) {
   if (req.query.uid === undefined || req.query.uid === ''
     || req.query.timestamp === undefined || req.query.timestamp === ''
