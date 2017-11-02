@@ -11,6 +11,9 @@ var Bike = sequelize.import('./bike');
 Course.hasMany(Dating, {foreignKey: 'courseId', targetKey: 'courseId'});
 Dating.belongsTo(Course);
 
+Coach.hasMany(Dating, {foreignKey: 'coachId', targetKey: 'coachId'});
+Dating.belongsTo(Coach);
+
 Coach.hasMany(Course, {foreignKey: 'coachId', targetKey: 'coachId'});
 Course.belongsTo(Coach);
 

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var CourseModel = require('../../models/index').Course;
+var CoachModel = require('../../models/index').Coach;
 var sha1 = require('sha1');
 var md5 = require('md5');
 var MESSAGE = require('./config').MESSAGE;
@@ -19,7 +20,11 @@ router.get('/', function (req, res, next) {
     return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
   }
 
-  CourseModel.findAll().then(function (courses) {
+  CourseModel.findAll(
+      {
+          include: [CoachModel]
+      }
+  ).then(function (courses) {
     return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, courses: courses})
   });
 });

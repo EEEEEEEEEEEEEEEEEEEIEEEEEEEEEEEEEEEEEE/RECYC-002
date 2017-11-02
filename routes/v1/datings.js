@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var DatingModel = require('../../models/index').Dating;
 var CourseModel = require('../../models/index').Course;
+var CoachModel = require('../../models/index').Coach;
 var sha1 = require('sha1');
 var md5 = require('md5');
 var MESSAGE = require('./config').MESSAGE;
@@ -20,7 +21,11 @@ router.get('/', function (req, res, next) {
     return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
   }
 
-  DatingModel.findAll().then(function (datings) {
+  DatingModel.findAll(
+      {
+          include: [CourseModel]
+      }
+  ).then(function (datings) {
     return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, datings: datings})
   });
 });
