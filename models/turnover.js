@@ -2,7 +2,7 @@ module.exports = function (sequelize, DataTypes) {
     return sequelize.define(
         'record',
         {
-            'user_id': {
+            'userId': {
                 'type': DataTypes.INTEGER,
                 'allowNull': false
             },
@@ -18,6 +18,15 @@ module.exports = function (sequelize, DataTypes) {
                 'type': DataTypes.STRING(45),
                 'allowNull': true
             }
+        },
+        {
+            indexes: [
+                {
+                    name: 'user_id',
+                    method: 'BTREE',
+                    fields: ['userId']
+                }
+            ]
         }
     );
 }

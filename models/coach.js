@@ -2,7 +2,11 @@ module.exports = function (sequelize, DataTypes) {
     return sequelize.define(
         'coach',
         {
-            'coach_id': {
+            'coachId': {
+                'type': DataTypes.INTEGER,
+                'allowNull': false
+            },
+            'companyId': {
                 'type': DataTypes.INTEGER,
                 'allowNull': false
             },
@@ -70,6 +74,15 @@ module.exports = function (sequelize, DataTypes) {
                 'type': DataTypes.STRING(45),
                 'allowNull': true
             }
+        },
+        {
+            indexes: [
+                {
+                    name: 'company_id',
+                    method: 'BTREE',
+                    fields: ['companyId']
+                }
+            ]
         }
     );
 }

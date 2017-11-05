@@ -6,6 +6,10 @@ module.exports = function (sequelize, DataTypes) {
                 'type': DataTypes.INTEGER,
                 'allowNull': false
             },
+            'coachId': {
+                'type': DataTypes.INTEGER,
+                'allowNull': false
+            },
             'course_name': {
                 'type': DataTypes.STRING(45),
                 'allowNull': false

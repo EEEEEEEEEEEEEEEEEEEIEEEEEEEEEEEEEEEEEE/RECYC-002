@@ -6,6 +6,14 @@ module.exports = function (sequelize, DataTypes) {
                 'type': DataTypes.INTEGER,
                 'allowNull': true
             },
+            'courseId': {
+                'type': DataTypes.INTEGER,
+                'allowNull': true
+            },
+            'coachId': {
+                'type': DataTypes.INTEGER,
+                'allowNull': true
+            },
             'dating_title_img': {
                 'type': DataTypes.STRING(125),
                 'allowNull': true
@@ -57,6 +65,11 @@ module.exports = function (sequelize, DataTypes) {
                     name: 'course_id',
                     method: 'BTREE',
                     fields: ['courseId']
+                },
+                {
+                    name: 'coach_id',
+                    method: 'BTREE',
+                    fields: ['coachId']
                 }
             ]
         }

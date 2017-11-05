@@ -10,28 +10,34 @@ var Bike = sequelize.import('./bike');
 var Record = sequelize.import('./record');
 var Turnover = sequelize.import('./turnover');
 
-Course.hasMany(Dating, {foreignKey: 'course_id', targetKey: 'courseId'});
+Course.hasMany(Dating, {foreignKey: 'courseId', targetKey: 'courseId'});
 Dating.belongsTo(Course);
 
-Coach.hasMany(Dating, {foreignKey: 'coach_id', targetKey: 'coachId'});
+Coach.hasMany(Dating, {foreignKey: 'coachId', targetKey: 'coachId'});
 Dating.belongsTo(Coach);
 
-Coach.hasMany(Course, {foreignKey: 'coach_id', targetKey: 'coachId'});
+Coach.hasMany(Course, {foreignKey: 'coachId', targetKey: 'coachId'});
 Course.belongsTo(Coach);
 
-User.hasMany(Record, {foreignKey: 'user_id', targetKey: 'userId'});
+Company.hasMany(Coach, {foreignKey: 'companyId', targetKey: 'companyId'});
+Coach.belongsTo(Company);
+
+User.hasMany(Turnover, {foreignKey: 'userId', targetKey: 'userId'});
+Turnover.belongsTo(User);
+
+User.hasMany(Record, {foreignKey: 'userId', targetKey: 'userId'});
 Record.belongsTo(User);
 
-Coach.hasMany(Record, {foreignKey: 'coach_id', targetKey: 'coachId'});
+Coach.hasMany(Record, {foreignKey: 'coachId', targetKey: 'coachId'});
 Record.belongsTo(Coach);
 
-Dating.hasMany(Record, {foreignKey: 'dating_id', targetKey: 'datingId'});
+Dating.hasMany(Record, {foreignKey: 'datingId', targetKey: 'datingId'});
 Record.belongsTo(Dating);
 
-Course.hasMany(Record, {foreignKey: 'course_id', targetKey: 'courseId'});
+Course.hasMany(Record, {foreignKey: 'courseId', targetKey: 'courseId'});
 Record.belongsTo(Course);
 
-User.hasMany(Turnover, {foreignKey: 'user_id', targetKey: 'userId'});
+User.hasMany(Turnover, {foreignKey: 'userId', targetKey: 'userId'});
 Turnover.belongsTo(User);
 
 User.belongsToMany(Dating, {through: 'userDating', foreignKey: 'userId'});

@@ -2,19 +2,19 @@ module.exports = function (sequelize, DataTypes) {
     return sequelize.define(
         'record',
         {
-            'user_id': {
+            'userId': {
                 'type': DataTypes.INTEGER,
                 'allowNull': false
             },
-            'coach_id': {
+            'coachId': {
                 'type': DataTypes.INTEGER,
                 'allowNull': false
             },
-            'dating_id': {
+            'datingId': {
                 'type': DataTypes.INTEGER,
                 'allowNull': false
             },
-            'course_id': {
+            'courseId': {
                 'type': DataTypes.INTEGER,
                 'allowNull': false
             },
