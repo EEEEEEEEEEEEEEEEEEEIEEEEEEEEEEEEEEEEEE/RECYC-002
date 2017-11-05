@@ -26,10 +26,6 @@ module.exports = function (sequelize, DataTypes) {
                 'type': DataTypes.TEXT,
                 'allowNull': true
             },
-            'coachId': {
-                'type': DataTypes.INTEGER,
-                'allowNull': true
-            },
             'coach_name': {
                 'type': DataTypes.STRING(45),
                 'allowNull': true

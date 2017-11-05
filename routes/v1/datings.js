@@ -75,7 +75,7 @@ router.get('/create', function (req, res, next) {
     console.log(course)
     var dating = {
       course: course,
-      courseId: course.id,
+      course_id: course.id,
       course_name: course.course_name,
       course_content: course.course_content,
       course_teacher: course.course_teacher,

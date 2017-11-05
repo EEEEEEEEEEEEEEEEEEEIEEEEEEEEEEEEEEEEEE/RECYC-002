@@ -38,7 +38,7 @@ router.get('/create', function (req, res, next) {
     }
 
     var coach = {
-        coachId: req.query.coach_id,
+        coach_id: req.query.coach_id,
         coach_account: req.query.coach_account,
         coach_password: req.query.coach_password,
         coach_name: req.query.coach_name,
@@ -124,7 +124,7 @@ router.get('/detail', function (req, res, next) {
 
   CoachModel.findAll({
     where: {
-      coachId: req.query.coachId
+      coach_id: req.query.coachId
     }
   }).then(function (coach) {
     return res.jsonp({code: 200, msg: MESSAGE.SUCCESS, coach: coach})

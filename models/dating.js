@@ -6,14 +6,6 @@ module.exports = function (sequelize, DataTypes) {
                 'type': DataTypes.INTEGER,
                 'allowNull': true
             },
-            'courseId': {
-                'type': DataTypes.INTEGER,
-                'allowNull': false
-            },
-            'coachId': {
-                'type': DataTypes.INTEGER,
-                'allowNull': false
-            },
             'dating_title_img': {
                 'type': DataTypes.STRING(125),
                 'allowNull': true

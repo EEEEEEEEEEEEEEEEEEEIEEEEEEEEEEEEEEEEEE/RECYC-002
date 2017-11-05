@@ -2,8 +2,8 @@ module.exports = function (sequelize, DataTypes) {
     return sequelize.define(
         'coach',
         {
-            'coachId': {
-                'type': DataTypes.STRING(45),
+            'coach_id': {
+                'type': DataTypes.INTEGER,
                 'allowNull': false
             },
             'coach_account': {

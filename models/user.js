@@ -3,7 +3,7 @@ module.exports = function (sequelize, DataTypes) {
         'user',
         {
             'user_id': {
-                'type': DataTypes.STRING(45),
+                'type': DataTypes.INTEGER,
                 'allowNull': true
             },
             'user_account': {
