@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var CoachModel = require('../../models').Coach;
 var CourseModel = require('../../models').Course;
+var RecordModel = require('../../models').Record;
 var sha1 = require('sha1');
 var md5 = require('md5');
 var MESSAGE = require('./config').MESSAGE;
@@ -20,7 +21,9 @@ router.get('/', function (req, res, next) {
     return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
   }
 
-  CoachModel.findAll().then(function (coachs) {
+  CoachModel.findAll({
+      include: [RecordModel]
+  }).then(function (coachs) {
     return res.jsonp({code: 200, msg: MESSAGE.SUCCESS, coachs: coachs})
   });
 
@@ -39,6 +42,7 @@ router.get('/create', function (req, res, next) {
 
     var coach = {
         coachId: req.query.coach_id,
+        companyId: req.query.company_id,
         coach_account: req.query.coach_account,
         coach_password: req.query.coach_password,
         coach_name: req.query.coach_name,

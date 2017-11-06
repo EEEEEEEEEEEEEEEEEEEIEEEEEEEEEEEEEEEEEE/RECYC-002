@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var CoachModel = require('../../models/index').Coach;
+var RecordModel = require('../../models/index').Record;
 var sha1 = require('sha1');
 var md5 = require('md5');
 var MESSAGE = require('./config').MESSAGE;

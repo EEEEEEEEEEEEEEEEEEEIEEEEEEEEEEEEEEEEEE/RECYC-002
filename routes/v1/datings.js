@@ -54,43 +54,30 @@ router.get('/create', function (req, res, next) {
 
   if (req.query.uid === undefined || req.query.uid === ''
     || req.query.token === undefined || req.query.token === ''
-    || req.query.timestamp === undefined || req.query.timestamp === ''
-    || req.query.course_id === undefined || req.query.course_id === ''
-    || req.query.dating_id === undefined || req.query.dating_id === ''
-    || req.query.dating_rating === undefined || req.query.dating_rating === ''
-    || req.query.dating_time === undefined || req.query.dating_time === ''
-    || req.query.dating_capacity === undefined || req.query.dating_capacity === ''
-    || req.query.dating_register === undefined || req.query.dating_register === '') {
+    || req.query.timestamp === undefined || req.query.timestamp === '') {
     return res.jsonp({code: 1000, msg: MESSAGE.PARAMETER_ERROR});
   }
 
   if (!checkToken(req.query.uid, req.query.timestamp, req.query.token)) {
     return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
   }
-  CourseModel.findOne({
-    where: {
-      course_id: req.query.course_id
-    }
-  }).then(function (course) {
-    console.log(course)
-    var dating = {
-      course: course,
-      course_id: course.id,
-      course_name: course.course_name,
-      course_content: course.course_content,
-      course_teacher: course.course_teacher,
-      dating_id: req.query.dating_id,
-      dating_rating: req.query.dating_rating,
-      dating_users: '',
-      dating_time: req.query.dating_time,
-      dating_capacity: req.query.dating_capacity,
-      dating_register: req.query.dating_register,
-    }
 
-    DatingModel.create(dating).then(function () {
-      return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
-    });
-  })
+  var dating = {
+    courseId: req.query.courseId,
+    coachId: req.query.coachId,
+    dating_id: req.query.dating_id,
+    dating_place: req.query.dating_place,
+    dating_rating: req.query.dating_rating,
+    dating_users: '',
+    dating_time: req.query.dating_time,
+    dating_date: req.query.dating_date,
+    dating_capacity: req.query.dating_capacity,
+    dating_register: req.query.dating_register,
+  }
+
+  DatingModel.create(dating).then(function () {
+    return res.jsonp({code: 0, msg: MESSAGE.SUCCESS})
+  });
 });
 
 router.get('/edit/:id', function (req, res, next) {

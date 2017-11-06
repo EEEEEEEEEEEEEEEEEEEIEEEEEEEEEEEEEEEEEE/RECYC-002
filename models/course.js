@@ -32,7 +32,7 @@ module.exports = function (sequelize, DataTypes) {
             },
             'coach_name': {
                 'type': DataTypes.STRING(45),
-                'allowNull': true
+                'allowNull': false
             },
             'course_capacity': {
                 'type': DataTypes.STRING(45),

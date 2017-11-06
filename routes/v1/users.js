@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var UserModel = require('../../models/index').User;
+var RecordModel = require('../../models/index').Record;
 var sha1 = require('sha1');
 var md5 = require('md5');
 var MESSAGE = require('./config').MESSAGE;
@@ -18,7 +19,9 @@ router.get('/', function (req, res, next) {
     return res.jsonp({code: 403, msg: MESSAGE.TOKEN_ERROR})
   }
 
-  UserModel.findAll().then(function (users) {
+  UserModel.findAll({
+      include: [RecordModel]
+  }).then(function (users) {
     return res.jsonp({code: 0, msg: MESSAGE.SUCCESS, users: users})
   });
 });
